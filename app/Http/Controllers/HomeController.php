@@ -32,10 +32,10 @@ class HomeController extends Controller
         if($request->isMethod('post')){
             if($request->images){
                 foreach($request->images as $image){
-                    $path = $image->store('images', 'folder');
+                    $path = $image->store('images', 's3');
                     $file = new File();
                     $file->user_id = auth()->id();
-                    $file->path = $path;
+                    $file->path = 'https://artpooltestbucket.s3.ap-south-1.amazonaws.com/'.$path;
                     $file->save();
                 }
             }
